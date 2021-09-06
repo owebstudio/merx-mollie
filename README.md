@@ -1,6 +1,6 @@
-# Mollie Gateway for Merx Kirby Plugin
+# Mollie Payment Gateway for Merx
 
-Mollie payment gateway for [Kirby Merx plugin](https://github.com/wagnerwagner/merx).
+This plugin is [Mollie](https://www.mollie.com) payment gateway for [Kirby Merx plugin](https://github.com/wagnerwagner/merx).
 
 ## Installation
 
@@ -14,6 +14,20 @@ composer require clicktonext/merx-mollie
 
 ```ssh
 git submodule add https://github.com/clicktonext/merx-mollie.git site/plugins/merx-mollie
+```
+
+## Usage
+
+Get API key from [Mollie dashboard](https://www.mollie.com/dashboard/developers/api-keys) and set from config.php like following usage: 
+
+**/site/config/config.php**
+```php
+<?php
+
+return [
+    'clicktonext.merx-mollie.apiKey' => 'YOUR_API_KEY'
+];
+
 ```
 
 ## Options

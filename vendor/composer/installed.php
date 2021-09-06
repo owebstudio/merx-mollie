@@ -1,18 +1,18 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '1.0.0',
-        'version' => '1.0.0.0',
+        'pretty_version' => '1.0.1',
+        'version' => '1.0.1.0',
         'type' => 'kirby-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'reference' => NULL,
-        'name' => 'clicktonext/kirby-merx-mollie',
+        'name' => 'clicktonext/merx-mollie',
         'dev' => true,
     ),
     'versions' => array(
-        'clicktonext/kirby-merx-mollie' => array(
-            'pretty_version' => '1.0.0',
-            'version' => '1.0.0.0',
+        'clicktonext/merx-mollie' => array(
+            'pretty_version' => '1.0.1',
+            'version' => '1.0.1.0',
             'type' => 'kirby-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
