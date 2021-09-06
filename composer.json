@@ -1,0 +1,39 @@
+{
+  "name": "clicktonext/merx-mollie",
+  "description": "Mollie payment gateway for Kirby Merx plugin.",
+  "version": "1.0.0",
+  "type": "kirby-plugin",
+  "license": "MIT",
+  "keywords": [
+    "kirby",
+    "kirby-3",
+    "kirby3-plugin",
+    "kirby-plugin",
+    "kirby-payment",
+    "merx",
+    "mollie",
+    "payment-gateway"
+  ],
+  "authors": [
+    {
+      "name": "Click to Next",
+      "email": "support@clicktonext.com",
+      "homepage": "https://clicktonext.com"
+    }
+  ],
+  "require": {
+    "php": "^7.3 || ^8.0",
+    "getkirby/composer-installer": "^1.2",
+    "mollie/mollie-api-php": "^2.0"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "extra": {
+    "installer-name": "merx-mollie"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
