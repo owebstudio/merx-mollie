@@ -11,6 +11,42 @@ use Wagnerwagner\Merx\Gateways;
 Kirby::plugin('clicktonext/merx-mollie', [
     'options' => [
         'apiKey' => null
+    ],
+    'routes' => [
+        [
+            'pattern' => 'shop-api/mollie-webhook',
+            'method' => 'post',
+            'action' => function () {
+                try {
+                    $orderId = get('id');
+
+                    if (empty($orderId) === true) {
+                        throw new Exception('Invalid order id');
+                    }
+
+                    kirby()->impersonate('kirby');
+                    $ordersPage = page(option('ww.merx.ordersPage', 'orders'));
+
+                    if ($orderPage = $ordersPage->children()->findBy('orderId', $orderId)) {
+                        // Create mollie client
+                        $mollie = new MollieApiClient();
+                        $mollie->setApiKey(option('clicktonext.merx-mollie.apiKey'));
+
+                        // Get payment from mollie
+                        $payment = $mollie->payments->get($orderId);
+                        $status = $payment->status ?? 'failed';
+
+                        $orderPage->update([
+                            'paymentStatus' => $status
+                        ]);
+                    } else {
+                        throw new Exception('Invalid order');
+                    }
+                } catch (Exception $e) {
+                    echo $e->getMessage();
+                }
+            }
+        ]
     ]
 ]);
 
@@ -24,14 +60,19 @@ Gateways::$gateways['mollie'] = [
         $mollie->setApiKey(option('clicktonext.merx-mollie.apiKey'));
 
         // Create payment request
-        $payment = $mollie->payments->create([
+        $data = [
             'amount' => [
                 'currency' => option('ww.merx.currency'),
                 'value' => number_format($cart->getSum(), 2, '.', '')
             ],
             'description' => 'Order Id # ' . $virtualOrderPage->uid() . ' (' . url() . ')',
             'redirectUrl' => url(option('ww.merx.successPage'))
-        ]);
+        ];
+
+        if (option('clicktonext.merx-mollie.webhooks', false) === true) {
+            $data['webhookUrl'] = url('shop-api/mollie-webhook');
+        }
+        $payment = $mollie->payments->create($data);
 
         // Update the order
         $virtualOrderPage->content()->update([
@@ -62,6 +103,7 @@ Gateways::$gateways['mollie'] = [
         $virtualOrderPage->content()->update([
             'paymentMethod' => 'mollie:' . $payment->method,
             'paymentComplete' => true,
+            'paymentStatus' => $status,
             'payedDate' => date('c'),
         ]);
 
