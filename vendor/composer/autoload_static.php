@@ -18,6 +18,7 @@ class ComposerStaticInit3057c8128620c2490fd95a1795883bd8
         'C' => 
         array (
             'Composer\\CaBundle\\' => 18,
+            'ClickToNext\\' => 12,
         ),
     );
 
@@ -34,9 +35,14 @@ class ComposerStaticInit3057c8128620c2490fd95a1795883bd8
         array (
             0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
         ),
+        'ClickToNext\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
     );
 
     public static $classMap = array (
+        'ClickToNext\\MollieGateway' => __DIR__ . '/../..' . '/src/MollieGateway.php',
         'Composer\\CaBundle\\CaBundle' => __DIR__ . '/..' . '/composer/ca-bundle/src/CaBundle.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Kirby\\ComposerInstaller\\CmsInstaller' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/CmsInstaller.php',

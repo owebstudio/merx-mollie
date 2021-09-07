@@ -9,4 +9,5 @@ return array(
     'Mollie\\Api\\' => array($vendorDir . '/mollie/mollie-api-php/src'),
     'Kirby\\' => array($vendorDir . '/getkirby/composer-installer/src'),
     'Composer\\CaBundle\\' => array($vendorDir . '/composer/ca-bundle/src'),
+    'ClickToNext\\' => array($baseDir . '/src'),
 );

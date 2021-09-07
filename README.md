@@ -4,7 +4,7 @@ This plugin is [Mollie](https://www.mollie.com) payment gateway for [Kirby Merx 
 
 ## Installation
 
-### Manual
+### Standalone
 
 1. Download the latest release
 2. Unzip downloaded file
@@ -25,11 +25,13 @@ git submodule add https://github.com/clicktonext/merx-mollie.git site/plugins/me
 ## Setup
 
 ### Step 1: Get API key
-Get API key from [Mollie dashboard](https://www.mollie.com/dashboard/developers/api-keys) and set from config.php like following usage: 
+
+Get API key from [Mollie dashboard](https://www.mollie.com/dashboard/developers/api-keys) and set from config.php like following usage:
 
 ### Step 2: Set API key from config
 
 **/site/config/config.php**
+
 ```php
 <?php
 
@@ -57,6 +59,4 @@ Enter the Kirby panel with Merx installed. Go to the payment methods section fro
 | clicktonext.merx-mollie.apiKey | string | null | API key for Mollie (required) |
 | clicktonext.merx-mollie.webhooks | boolean | false | Activates Mollie webhooks to process real-time status updates |
 
-All the values can be updated in the `config.php` file. 
-
-To test it, 
+All the values can be updated in the `config.php` file.
