@@ -26,9 +26,11 @@ git submodule add https://github.com/clicktonext/merx-mollie.git site/plugins/me
 
 ### Step 1: Get API key
 
-Get API key from [Mollie dashboard](https://www.mollie.com/dashboard/developers/api-keys) and set from config.php like following usage:
+Get API key from [Mollie dashboard](https://www.mollie.com/dashboard/developers/api-keys).
 
 ### Step 2: Set API key from config
+
+Set `apiKey` option from config.php like following usage:
 
 **/site/config/config.php**
 
