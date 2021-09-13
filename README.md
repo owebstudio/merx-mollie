@@ -58,7 +58,7 @@ Enter the Kirby panel with Merx installed. Go to the payment methods section fro
 
 | Option | Type | Default | Description |
 |:---|:--- |:---|:---|
-| clicktonext.merx-mollie.apiKey | string | null | API key for Mollie (required) |
-| clicktonext.merx-mollie.webhooks | boolean | false | Activates Mollie webhooks to process real-time status updates |
+| apiKey | string | null | API key for Mollie (required) |
+| webhooks | boolean | false | Activates Mollie webhooks to process real-time status updates |
 
-All the values can be updated in the `config.php` file.
+All the values can be updated in the `config.php` file and prefixed with `clicktonext.merx-mollie.`.

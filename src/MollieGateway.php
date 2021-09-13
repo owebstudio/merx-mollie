@@ -63,7 +63,7 @@ class MollieGateway
             'initializePayment' => function (OrderPage $virtualOrderPage): OrderPage {
                 $cart = $virtualOrderPage->cart();
 
-                // Create mollie gateway instance
+                // Create gateway instance
                 $mollie = new MollieGateway();
 
                 // Create payment data
@@ -93,15 +93,15 @@ class MollieGateway
                 return $virtualOrderPage;
             },
             'completePayment' => function (OrderPage $virtualOrderPage, array $data): OrderPage {
-                // Create mollie gateway instance
-                $mollie = new MollieGateway();
+                // Create gateway instance
+                $gateway = new MollieGateway();
 
                 // Get payment from mollie
-                $payment = $mollie->getPayment($virtualOrderPage->orderId());
+                $payment = $gateway->getPayment($virtualOrderPage->orderId());
                 $status = $payment->status ?? 'failed';
 
                 // Check payment status success
-                if ($status !== 'paid') {
+                if (in_array($status, ['paid', 'pending', 'open']) === false) {
                     throw new Exception([
                         'httpCode' => 400,
                         'key' => 'merx.' . ($status === 'canceled' ? 'paymentCanceled' : 'completePayment')
@@ -109,12 +109,13 @@ class MollieGateway
                 }
 
                 // Update payment as completed
-                $virtualOrderPage->content()->update([
-                    'paymentMethod' => 'mollie:' . $payment->method,
-                    'paymentComplete' => true,
-                    'paymentStatus' => $status,
-                    'payedDate' => date('c'),
-                ]);
+                if ($status === 'paid') {
+                    $virtualOrderPage->content()->update([
+                        'paymentMethod' => 'mollie:' . $payment->method,
+                        'paymentComplete' => true,
+                        'payedDate' => date('c')
+                    ]);
+                }
 
                 return $virtualOrderPage;
             }
