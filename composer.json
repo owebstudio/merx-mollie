@@ -14,10 +14,14 @@
     "mollie",
     "payment-gateway"
   ],
+  "homepage": "https://clicktonext.com",
+  "support": {
+    "email": "support@clicktonext.com"
+  },
   "authors": [
     {
       "name": "Click to Next",
-      "email": "support@clicktonext.com",
+      "email": "contact@clicktonext.com",
       "homepage": "https://clicktonext.com"
     }
   ],
