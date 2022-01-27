@@ -4,23 +4,9 @@ This plugin is [Mollie](https://www.mollie.com) payment gateway for [Kirby Merx 
 
 ## Installation
 
-### Standalone
-
 1. Download the latest release
 2. Unzip downloaded file
 3. Copy/paste unzipped folder in your `/site/plugins` folder
-
-### With composer
-
-```ssh
-composer require clicktonext/merx-mollie
-```
-
-### Git submodule
-
-```ssh
-git submodule add https://github.com/clicktonext/merx-mollie.git site/plugins/merx-mollie
-```
 
 ## Setup
 
