@@ -73,8 +73,20 @@ class MollieGateway
                         'value' => number_format($cart->getSum(), 2, '.', '')
                     ],
                     'description' => 'Order Id # ' . $virtualOrderPage->uid() . ' (' . url() . ')',
-                    'redirectUrl' => url(option('ww.merx.successPage'))
+                    'redirectUrl' => url(option('ww.merx.successPage')),
+                    'testmode' => $virtualOrderPage->testmode()->or(option('clicktonext.merx-mollie.testmode', false))->bool(),
                 ];
+
+                // Check and pass custom method option
+                if ($virtualOrderPage->method()->isNotEmpty()) {
+                    $method = $virtualOrderPage->method()->yaml();
+                } else {
+                    $method = option('clicktonext.merx-mollie.method', []);
+                }
+
+                if (empty($method) === false) {
+                    $data['method'] = $method;
+                }
 
                 // Set webhook url if enabled
                 if (option('clicktonext.merx-mollie.webhooks', false) === true) {

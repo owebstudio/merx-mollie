@@ -46,6 +46,7 @@ return array(
     'Mollie\\Api\\Endpoints\\SubscriptionEndpoint' => $vendorDir . '/mollie/mollie-api-php/src/Endpoints/SubscriptionEndpoint.php',
     'Mollie\\Api\\Endpoints\\WalletEndpoint' => $vendorDir . '/mollie/mollie-api-php/src/Endpoints/WalletEndpoint.php',
     'Mollie\\Api\\Exceptions\\ApiException' => $vendorDir . '/mollie/mollie-api-php/src/Exceptions/ApiException.php',
+    'Mollie\\Api\\Exceptions\\CurlConnectTimeoutException' => $vendorDir . '/mollie/mollie-api-php/src/Exceptions/CurlConnectTimeoutException.php',
     'Mollie\\Api\\Exceptions\\HttpAdapterDoesNotSupportDebuggingException' => $vendorDir . '/mollie/mollie-api-php/src/Exceptions/HttpAdapterDoesNotSupportDebuggingException.php',
     'Mollie\\Api\\Exceptions\\IncompatiblePlatform' => $vendorDir . '/mollie/mollie-api-php/src/Exceptions/IncompatiblePlatform.php',
     'Mollie\\Api\\Exceptions\\UnrecognizedClientException' => $vendorDir . '/mollie/mollie-api-php/src/Exceptions/UnrecognizedClientException.php',
