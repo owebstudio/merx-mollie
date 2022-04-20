@@ -73,9 +73,13 @@ class MollieGateway
                         'value' => number_format($cart->getSum(), 2, '.', '')
                     ],
                     'description' => 'Order Id # ' . $virtualOrderPage->uid() . ' (' . url() . ')',
-                    'redirectUrl' => url(option('ww.merx.successPage')),
-                    'testmode' => $virtualOrderPage->testmode()->or(option('clicktonext.merx-mollie.testmode', false))->bool(),
+                    'redirectUrl' => url(option('ww.merx.successPage'))
                 ];
+
+                // Set test mode
+                if ($virtualOrderPage->testmode()->or(option('clicktonext.merx-mollie.testmode', false))->bool() === true) {
+                    $data['testmode'] = true;
+                }
 
                 // Check and pass custom method option
                 if ($virtualOrderPage->method()->isNotEmpty()) {
