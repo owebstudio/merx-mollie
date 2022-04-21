@@ -82,6 +82,7 @@ class ComposerStaticInit3057c8128620c2490fd95a1795883bd8
         'Mollie\\Api\\Endpoints\\SubscriptionEndpoint' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Endpoints/SubscriptionEndpoint.php',
         'Mollie\\Api\\Endpoints\\WalletEndpoint' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Endpoints/WalletEndpoint.php',
         'Mollie\\Api\\Exceptions\\ApiException' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Exceptions/ApiException.php',
+        'Mollie\\Api\\Exceptions\\CurlConnectTimeoutException' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Exceptions/CurlConnectTimeoutException.php',
         'Mollie\\Api\\Exceptions\\HttpAdapterDoesNotSupportDebuggingException' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Exceptions/HttpAdapterDoesNotSupportDebuggingException.php',
         'Mollie\\Api\\Exceptions\\IncompatiblePlatform' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Exceptions/IncompatiblePlatform.php',
         'Mollie\\Api\\Exceptions\\UnrecognizedClientException' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Exceptions/UnrecognizedClientException.php',
