@@ -12,6 +12,11 @@ class ApiException extends \Exception
     protected $field;
 
     /**
+     * @var string
+     */
+    protected $plainMessage;
+
+    /**
      * @var \Psr\Http\Message\RequestInterface|null
      */
     protected $request;
@@ -50,6 +55,8 @@ class ApiException extends \Exception
         $response = null,
         $previous = null
     ) {
+        $this->plainMessage = $message;
+
         $this->raisedAt = new \DateTimeImmutable();
 
         $formattedRaisedAt = $this->raisedAt->format(DateTime::ISO8601);
@@ -155,7 +162,7 @@ class ApiException extends \Exception
     }
 
     /**
-     * @param int $key
+     * @param string $key
      * @return bool
      */
     public function hasLink($key)
@@ -164,7 +171,7 @@ class ApiException extends \Exception
     }
 
     /**
-     * @param int $key
+     * @param string $key
      * @return mixed|null
      */
     public function getLink($key)
@@ -177,7 +184,7 @@ class ApiException extends \Exception
     }
 
     /**
-     * @param int $key
+     * @param string $key
      * @return null
      */
     public function getUrl($key)
@@ -223,5 +230,15 @@ class ApiException extends \Exception
         }
 
         return $object;
+    }
+
+    /**
+     * Retrieve the plain exception message.
+     *
+     * @return string
+     */
+    public function getPlainMessage()
+    {
+        return $this->plainMessage;
     }
 }

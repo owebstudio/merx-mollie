@@ -14,11 +14,11 @@ class ComposerStaticInit3057c8128620c2490fd95a1795883bd8
         'K' => 
         array (
             'Kirby\\' => 6,
+            'KirbyNext\\' => 10,
         ),
         'C' => 
         array (
             'Composer\\CaBundle\\' => 18,
-            'ClickToNext\\' => 12,
         ),
     );
 
@@ -31,20 +31,20 @@ class ComposerStaticInit3057c8128620c2490fd95a1795883bd8
         array (
             0 => __DIR__ . '/..' . '/getkirby/composer-installer/src',
         ),
+        'KirbyNext\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
         'Composer\\CaBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
         ),
-        'ClickToNext\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
-        ),
     );
 
     public static $classMap = array (
-        'ClickToNext\\MollieGateway' => __DIR__ . '/../..' . '/src/MollieGateway.php',
         'Composer\\CaBundle\\CaBundle' => __DIR__ . '/..' . '/composer/ca-bundle/src/CaBundle.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'KirbyNext\\MollieGateway' => __DIR__ . '/../..' . '/src/MollieGateway.php',
         'Kirby\\ComposerInstaller\\CmsInstaller' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/CmsInstaller.php',
         'Kirby\\ComposerInstaller\\Installer' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/Installer.php',
         'Kirby\\ComposerInstaller\\Plugin' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/Plugin.php',

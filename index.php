@@ -1,12 +1,12 @@
 <?php
 
 use Kirby\Cms\App as Kirby;
-use ClickToNext\MollieGateway;
+use KirbyNext\MollieGateway;
 
 @include_once __DIR__ . '/vendor/autoload.php';
 
 // Register the plugin
-Kirby::plugin('clicktonext/merx-mollie', [
+Kirby::plugin('kirbynext/merx-mollie', [
     'options' => [
         'apiKey' => null,
         'webhooks' => false

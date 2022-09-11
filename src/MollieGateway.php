@@ -1,6 +1,6 @@
 <?php
 
-namespace ClickToNext;
+namespace KirbyNext;
 
 use Kirby\Exception\Exception;
 use Mollie\Api\MollieApiClient;
@@ -10,10 +10,10 @@ use Wagnerwagner\Merx\Gateways;
 /**
  * Mollie payment gateway for Merx
  *
- * @package   ClickToNext
- * @author    Click to Next <support@clicktonext.com>
- * @link      https://clicktonext.com
- * @copyright Click to Next
+ * @package   KirbyNext
+ * @author    Kirby Next <contact@kirbynext.com>
+ * @link      https://kirbynext.com
+ * @copyright Kirby Next
  * @license   MIT
  */
 class MollieGateway
@@ -23,7 +23,7 @@ class MollieGateway
     public function __construct()
     {
         $this->client = new MollieApiClient();
-        $this->client->setApiKey(option('clicktonext.merx-mollie.apiKey'));
+        $this->client->setApiKey(option('kirbynext.merx-mollie.apiKey'));
     }
 
     /**
@@ -77,7 +77,7 @@ class MollieGateway
                 ];
 
                 // Set test mode
-                if ($virtualOrderPage->testmode()->or(option('clicktonext.merx-mollie.testmode', false))->bool() === true) {
+                if ($virtualOrderPage->testmode()->or(option('kirbynext.merx-mollie.testmode', false))->bool() === true) {
                     $data['testmode'] = true;
                 }
 
@@ -85,7 +85,7 @@ class MollieGateway
                 if ($virtualOrderPage->method()->isNotEmpty()) {
                     $method = $virtualOrderPage->method()->yaml();
                 } else {
-                    $method = option('clicktonext.merx-mollie.method', []);
+                    $method = option('kirbynext.merx-mollie.method', []);
                 }
 
                 if (empty($method) === false) {
@@ -93,7 +93,7 @@ class MollieGateway
                 }
 
                 // Set webhook url if enabled
-                if (option('clicktonext.merx-mollie.webhooks', false) === true) {
+                if (option('kirbynext.merx-mollie.webhooks', false) === true) {
                     $data['webhookUrl'] = url('shop-api/mollie-webhook');
                 }
 

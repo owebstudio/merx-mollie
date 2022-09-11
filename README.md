@@ -24,7 +24,7 @@ Set `apiKey` option from config.php like following usage:
 <?php
 
 return [
-    'clicktonext.merx-mollie.apiKey' => 'YOUR_API_KEY'
+    'kirbynext.merx-mollie.apiKey' => 'YOUR_API_KEY'
 ];
 ```
 
@@ -67,7 +67,7 @@ $merx->completePayment():
 | method    | string &#124; array | []        | Choose a specific payment method and your customer will skip the selection screen and is sent directly to the chosen payment method. |
 | testmode  | boolean             | false     | Set to true to make payments a test payment.                                                                                         |
 
-All the values can be updated in the `config.php` file and prefixed with `clicktonext.merx-mollie.`.
+All the values can be updated in the `config.php` file and prefixed with `kirbynext.merx-mollie.`.
 
 ### Possible `method` option values
 

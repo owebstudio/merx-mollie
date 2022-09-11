@@ -39,7 +39,7 @@ class Payment extends BaseResource
     /**
      * The amount that has been settled containing the value and currency
      *
-     * @var \stdClass
+     * @var \stdClass|null
      */
     public $settlementAmount;
 
@@ -451,6 +451,20 @@ class Payment extends BaseResource
     }
 
     /**
+     * Get the mobile checkout URL where the customer can complete the payment.
+     *
+     * @return string|null
+     */
+    public function getMobileAppCheckoutUrl()
+    {
+        if (empty($this->_links->mobileAppCheckout)) {
+            return null;
+        }
+
+        return $this->_links->mobileAppCheckout->href;
+    }
+
+    /**
      * @return bool
      */
     public function canBeRefunded()
@@ -663,24 +677,7 @@ class Payment extends BaseResource
      */
     public function refund($data)
     {
-        $resource = "payments/" . urlencode($this->id) . "/refunds";
-
-        $data = $this->withPresetOptions($data);
-        $body = null;
-        if (count($data) > 0) {
-            $body = json_encode($data);
-        }
-
-        $result = $this->client->performHttpCall(
-            MollieApiClient::HTTP_POST,
-            $resource,
-            $body
-        );
-
-        return ResourceFactory::createFromApiResult(
-            $result,
-            new Refund($this->client)
-        );
+        return $this->client->paymentRefunds->createFor($this, $data);
     }
 
     /**

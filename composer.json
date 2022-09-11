@@ -1,30 +1,30 @@
 {
-  "name": "clicktonext/merx-mollie",
+  "name": "kirbynext/merx-mollie",
   "description": "Mollie payment gateway for Kirby 3 Merx plugin.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "type": "kirby-plugin",
-  "license": "proprietary",
+  "license": "MIT",
   "keywords": [
-    "clicktonext",
+    "kirbynext",
     "kirby",
     "kirby-3",
     "kirby3-plugin",
     "kirby-plugin",
-    "clicktonext-plugin",
+    "kirbynext-plugin",
     "kirby-payment",
     "merx",
     "mollie",
     "payment-gateway"
   ],
-  "homepage": "https://clicktonext.com",
+  "homepage": "https://kirbynext.com",
   "support": {
-    "email": "support@clicktonext.com"
+    "email": "support@kirbynext.com"
   },
   "authors": [
     {
-      "name": "Click to Next",
-      "email": "contact@clicktonext.com",
-      "homepage": "https://clicktonext.com"
+      "name": "Kirby Next",
+      "email": "contact@kirbynext.com",
+      "homepage": "https://kirbynext.com"
     }
   ],
   "require": {
@@ -35,11 +35,14 @@
   "config": {
     "optimize-autoloader": true,
     "preferred-install": "dist",
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "getkirby/composer-installer": true
+    }
   },
   "autoload": {
     "psr-4": {
-      "ClickToNext\\": "src/"
+      "KirbyNext\\": "src/"
     }
   },
   "extra": {
