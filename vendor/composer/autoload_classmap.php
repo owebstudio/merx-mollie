@@ -8,7 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'Composer\\CaBundle\\CaBundle' => $vendorDir . '/composer/ca-bundle/src/CaBundle.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
-    'KirbyNext\\MollieGateway' => $baseDir . '/src/MollieGateway.php',
     'Kirby\\ComposerInstaller\\CmsInstaller' => $vendorDir . '/getkirby/composer-installer/src/ComposerInstaller/CmsInstaller.php',
     'Kirby\\ComposerInstaller\\Installer' => $vendorDir . '/getkirby/composer-installer/src/ComposerInstaller/Installer.php',
     'Kirby\\ComposerInstaller\\Plugin' => $vendorDir . '/getkirby/composer-installer/src/ComposerInstaller/Plugin.php',
@@ -121,4 +120,5 @@ return array(
     'Mollie\\Api\\Types\\SequenceType' => $vendorDir . '/mollie/mollie-api-php/src/Types/SequenceType.php',
     'Mollie\\Api\\Types\\SettlementStatus' => $vendorDir . '/mollie/mollie-api-php/src/Types/SettlementStatus.php',
     'Mollie\\Api\\Types\\SubscriptionStatus' => $vendorDir . '/mollie/mollie-api-php/src/Types/SubscriptionStatus.php',
+    'Oweb\\MollieGateway' => $baseDir . '/src/MollieGateway.php',
 );

@@ -1,30 +1,30 @@
 {
-  "name": "kirbynext/merx-mollie",
+  "name": "owebstudio/merx-mollie",
   "description": "Mollie payment gateway for Kirby 3 Merx plugin.",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "type": "kirby-plugin",
   "license": "MIT",
   "keywords": [
-    "kirbynext",
+    "owebstudio",
+    "owebstudio-plugin",
     "kirby",
     "kirby-3",
     "kirby3-plugin",
     "kirby-plugin",
-    "kirbynext-plugin",
     "kirby-payment",
     "merx",
     "mollie",
     "payment-gateway"
   ],
-  "homepage": "https://kirbynext.com",
+  "homepage": "https://owebstudio.com",
   "support": {
-    "email": "support@kirbynext.com"
+    "email": "support@owebstudio.com"
   },
   "authors": [
     {
-      "name": "Kirby Next",
-      "email": "contact@kirbynext.com",
-      "homepage": "https://kirbynext.com"
+      "name": "oweb studio",
+      "email": "contact@owebstudio.com",
+      "homepage": "https://owebstudio.com"
     }
   ],
   "require": {
@@ -42,7 +42,7 @@
   },
   "autoload": {
     "psr-4": {
-      "KirbyNext\\": "src/"
+      "Oweb\\": "src/"
     }
   },
   "extra": {

@@ -7,6 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInit3057c8128620c2490fd95a1795883bd8
 {
     public static $prefixLengthsPsr4 = array (
+        'O' => 
+        array (
+            'Oweb\\' => 5,
+        ),
         'M' => 
         array (
             'Mollie\\Api\\' => 11,
@@ -14,7 +18,6 @@ class ComposerStaticInit3057c8128620c2490fd95a1795883bd8
         'K' => 
         array (
             'Kirby\\' => 6,
-            'KirbyNext\\' => 10,
         ),
         'C' => 
         array (
@@ -23,6 +26,10 @@ class ComposerStaticInit3057c8128620c2490fd95a1795883bd8
     );
 
     public static $prefixDirsPsr4 = array (
+        'Oweb\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
         'Mollie\\Api\\' => 
         array (
             0 => __DIR__ . '/..' . '/mollie/mollie-api-php/src',
@@ -30,10 +37,6 @@ class ComposerStaticInit3057c8128620c2490fd95a1795883bd8
         'Kirby\\' => 
         array (
             0 => __DIR__ . '/..' . '/getkirby/composer-installer/src',
-        ),
-        'KirbyNext\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
         ),
         'Composer\\CaBundle\\' => 
         array (
@@ -44,7 +47,6 @@ class ComposerStaticInit3057c8128620c2490fd95a1795883bd8
     public static $classMap = array (
         'Composer\\CaBundle\\CaBundle' => __DIR__ . '/..' . '/composer/ca-bundle/src/CaBundle.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'KirbyNext\\MollieGateway' => __DIR__ . '/../..' . '/src/MollieGateway.php',
         'Kirby\\ComposerInstaller\\CmsInstaller' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/CmsInstaller.php',
         'Kirby\\ComposerInstaller\\Installer' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/Installer.php',
         'Kirby\\ComposerInstaller\\Plugin' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/Plugin.php',
@@ -157,6 +159,7 @@ class ComposerStaticInit3057c8128620c2490fd95a1795883bd8
         'Mollie\\Api\\Types\\SequenceType' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Types/SequenceType.php',
         'Mollie\\Api\\Types\\SettlementStatus' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Types/SettlementStatus.php',
         'Mollie\\Api\\Types\\SubscriptionStatus' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Types/SubscriptionStatus.php',
+        'Oweb\\MollieGateway' => __DIR__ . '/../..' . '/src/MollieGateway.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

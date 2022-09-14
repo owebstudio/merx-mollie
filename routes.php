@@ -1,7 +1,7 @@
 <?php
 
 use Kirby\Exception\Exception;
-use KirbyNext\MollieGateway;
+use Oweb\MollieGateway;
 
 return [
     [
