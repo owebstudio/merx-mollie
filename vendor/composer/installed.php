@@ -1,8 +1,8 @@
 <?php return array(
     'root' => array(
         'name' => 'owebstudio/merx-mollie',
-        'pretty_version' => '1.2.2',
-        'version' => '1.2.2.0',
+        'pretty_version' => '1.2.3',
+        'version' => '1.2.3.0',
         'reference' => NULL,
         'type' => 'kirby-plugin',
         'install_path' => __DIR__ . '/../../',
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'composer/ca-bundle' => array(
-            'pretty_version' => '1.3.3',
-            'version' => '1.3.3.0',
-            'reference' => '30897edbfb15e784fe55587b4f73ceefd3c4d98c',
+            'pretty_version' => '1.3.5',
+            'version' => '1.3.5.0',
+            'reference' => '74780ccf8c19d6acb8d65c5f39cd72110e132bbd',
             'type' => 'library',
             'install_path' => __DIR__ . '/./ca-bundle',
             'aliases' => array(),
@@ -29,17 +29,17 @@
             'dev_requirement' => false,
         ),
         'mollie/mollie-api-php' => array(
-            'pretty_version' => 'v2.46.0',
-            'version' => '2.46.0.0',
-            'reference' => '343e55d65cfe07ac1e68e141682a971a10b3bae4',
+            'pretty_version' => 'v2.52.0',
+            'version' => '2.52.0.0',
+            'reference' => 'f2f694ce26ef37362bdffe7b230b4d89f1c74e2d',
             'type' => 'library',
             'install_path' => __DIR__ . '/../mollie/mollie-api-php',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'owebstudio/merx-mollie' => array(
-            'pretty_version' => '1.2.2',
-            'version' => '1.2.2.0',
+            'pretty_version' => '1.2.3',
+            'version' => '1.2.3.0',
             'reference' => NULL,
             'type' => 'kirby-plugin',
             'install_path' => __DIR__ . '/../../',

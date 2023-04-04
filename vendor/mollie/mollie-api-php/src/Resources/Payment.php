@@ -175,6 +175,13 @@ class Payment extends BaseResource
     public $redirectUrl;
 
     /**
+     * Cancel URL set on this payment
+     *
+     * @var string
+     */
+    public $cancelUrl;
+
+    /**
      * Webhook URL set on this payment
      *
      * @var string|null
@@ -672,7 +679,7 @@ class Payment extends BaseResource
      *
      * @param array $data
      *
-     * @return BaseResource
+     * @return \Mollie\Api\Resources\Refund
      * @throws ApiException
      */
     public function refund($data)
@@ -681,13 +688,14 @@ class Payment extends BaseResource
     }
 
     /**
-     * @return \Mollie\Api\Resources\BaseResource
+     * @return \Mollie\Api\Resources\Payment
      * @throws \Mollie\Api\Exceptions\ApiException
      */
     public function update()
     {
         $body = [
             "description" => $this->description,
+            "cancelUrl" => $this->cancelUrl,
             "redirectUrl" => $this->redirectUrl,
             "webhookUrl" => $this->webhookUrl,
             "metadata" => $this->metadata,

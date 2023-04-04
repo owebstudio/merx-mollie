@@ -1,7 +1,7 @@
 {
   "name": "owebstudio/merx-mollie",
   "description": "Mollie payment gateway for Kirby 3 Merx plugin.",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "type": "kirby-plugin",
   "license": "MIT",
   "keywords": [
@@ -18,7 +18,7 @@
   ],
   "homepage": "https://owebstudio.com",
   "support": {
-    "email": "support@owebstudio.com"
+    "email": "contact@owebstudio.com"
   },
   "authors": [
     {
@@ -28,7 +28,7 @@
     }
   ],
   "require": {
-    "php": "^7.4|^8.0",
+    "php": "^8.0",
     "getkirby/composer-installer": "^1.2",
     "mollie/mollie-api-php": "^2.0"
   },

@@ -2,6 +2,7 @@
 
 namespace Oweb;
 
+use Closure;
 use Kirby\Exception\Exception;
 use Mollie\Api\MollieApiClient;
 use OrderPage;
@@ -66,14 +67,21 @@ class MollieGateway
                 // Create gateway instance
                 $mollie = new MollieGateway();
 
+                // order description
+                $orderDescription = option('owebstudio.merx-mollie.orderDescription');
+
+                if ($orderDescription instanceof Closure) {
+                    $orderDescription = $orderDescription($virtualOrderPage);
+                }
+
                 // Create payment data
                 $data = [
                     'amount' => [
                         'currency' => option('ww.merx.currency'),
                         'value' => number_format($cart->getSum(), 2, '.', '')
                     ],
-                    'description' => 'Order Id # ' . $virtualOrderPage->uid() . ' (' . url() . ')',
-                    'redirectUrl' => url(option('ww.merx.successPage'))
+                    'description' => $orderDescription ?? 'Order Id # ' . $virtualOrderPage->uid() . ' (' . url() . ')',
+                    'redirectUrl' => option('owebstudio.merx-mollie.redirectUrl', url(option('ww.merx.successPage')))
                 ];
 
                 // Set test mode

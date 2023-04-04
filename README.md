@@ -60,16 +60,34 @@ $merx->completePayment():
 
 ## Options
 
-| Option    | Type                | Default   | Description                                                                                                                          |
-|:----------|:--------------------|:----------|:-------------------------------------------------------------------------------------------------------------------------------------|
-| apiKey    | string              | null      | API key for Mollie (required)                                                                                                        |
-| webhooks  | boolean             | false     | Activates Mollie webhooks to process real-time status updates                                                                        |
-| method    | string &#124; array | []        | Choose a specific payment method and your customer will skip the selection screen and is sent directly to the chosen payment method. |
-| testmode  | boolean             | false     | Set to true to make payments a test payment.                                                                                         |
+| Option           | Type                | Default | Description                                                                                                                          |
+|:-----------------|:--------------------|:--------|:-------------------------------------------------------------------------------------------------------------------------------------|
+| apiKey           | string              | null    | API key for Mollie (required)                                                                                                        |
+| webhooks         | boolean             | false   | Activates Mollie webhooks to process real-time status updates                                                                        |
+| method           | string &#124; array | []      | Choose a specific payment method and your customer will skip the selection screen and is sent directly to the chosen payment method. |
+| redirectUrl      | string              | null    | Sets custom redirect url after payment.                                                                                              |
+| orderDescription | string              | null    | Sets the custom description sent to Mollie.                                                                                          |
+| testmode         | boolean             | false   | Set to true to make payments a test payment.                                                                                         |
 
 All the values can be updated in the `config.php` file and prefixed with `owebstudio.merx-mollie.`.
 
 ### Possible `method` option values
 
-Possible values: `applepay`, `bancontact`, `banktransfer`, `belfius`, `creditcard`, `directdebit`, `eps`, `giftcard`, `giropay`, `ideal`, `kbc`, `mybank`, `paypal`
-, `paysafecard`, `przelewy24`, `sofort`
+Possible values: `applepay`, `bancontact`, `banktransfer`, `belfius`, `creditcard`, `directdebit`, `eps`, `giftcard`, `giropay`, `ideal`, `kbc`, `mybank`, `paypal`, `paysafecard`, `przelewy24`, `sofort`
+
+## Sample options
+
+```php
+<?php
+
+// /site/config/config.php
+return [
+    'owebstudio.merx-mollie' => [
+        'apiKey'            => 'YOUR_API_KEY',
+        'redirectUrl'       => 'https://yourshopdomain.com/return'
+        'orderDescription'  => function ($virtualOrderPage) {
+            retturn 'Order Id # ' . $virtualOrderPage->uid();
+        }
+    ]
+];
+```
