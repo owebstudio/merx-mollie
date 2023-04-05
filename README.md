@@ -49,6 +49,7 @@ $redirect = $merx->initializePayment([
     'paymentMethod' => 'mollie',
     'method' => ['creditcard', 'paypal'],
 ]);
+
 go($redirect);
 ```
 
@@ -60,14 +61,14 @@ $merx->completePayment():
 
 ## Options
 
-| Option           | Type                | Default | Description                                                                                                                          |
-|:-----------------|:--------------------|:--------|:-------------------------------------------------------------------------------------------------------------------------------------|
-| apiKey           | string              | null    | API key for Mollie (required)                                                                                                        |
-| webhooks         | boolean             | false   | Activates Mollie webhooks to process real-time status updates                                                                        |
-| method           | string &#124; array | []      | Choose a specific payment method and your customer will skip the selection screen and is sent directly to the chosen payment method. |
-| redirectUrl      | string              | null    | Sets custom redirect url after payment.                                                                                              |
-| orderDescription | string              | null    | Sets the custom description sent to Mollie.                                                                                          |
-| testmode         | boolean             | false   | Set to true to make payments a test payment.                                                                                         |
+| Option            | Type                | Default | Description                                                                                                                          |
+|:------------------|:--------------------|:--------|:-------------------------------------------------------------------------------------------------------------------------------------|
+| apiKey            | string              | null    | API key for Mollie (required)                                                                                                        |
+| webhooks          | boolean             | false   | Activates Mollie webhooks to process real-time status updates                                                                        |
+| method            | string &#124; array | []      | Choose a specific payment method and your customer will skip the selection screen and is sent directly to the chosen payment method. |
+| testmode          | boolean             | false   | Set to true to make payments a test payment.                                                                                         |
+| initializePayment | Closure             | null    | Sets custom initialize payment before payment. Be careful! This is advanced configuration.                                           |
+| completePayment   | Closure             | null    | Sets the custom complete method after payment. Be careful! This is advanced configuration.                                           |
 
 All the values can be updated in the `config.php` file and prefixed with `owebstudio.merx-mollie.`.
 
@@ -83,10 +84,32 @@ Possible values: `applepay`, `bancontact`, `banktransfer`, `belfius`, `creditcar
 // /site/config/config.php
 return [
     'owebstudio.merx-mollie' => [
-        'apiKey'            => 'YOUR_API_KEY',
-        'redirectUrl'       => 'https://yourshopdomain.com/return',
-        'orderDescription'  => function ($virtualOrderPage) {
-            retturn 'Order Id # ' . $virtualOrderPage->uid();
+        'apiKey'             => 'YOUR_API_KEY',
+        'completePayment'    => function ($virtualOrderPage, $data, $payment) {
+            $status = $payment->status ?? 'failed';
+            
+            if ($payment->method === 'ideal' && $status !== 'paid') {
+                throw new Exception([
+                    'httpCode' => 400,
+                    'key' => 'merx.completePayment'
+                ]);
+            }
+            
+            if ($status === 'paid') {
+                 $virtualOrderPage->content()->update([
+                    'paymentMethod' => 'mollie:' . $payment->method,
+                    'paymentComplete' => true,
+                    'payedDate' => date('c')
+                ]);
+            }
+            
+            return $virtualOrderPage;
+        },
+        'initializePayment'  => function ($virtualOrderPage, $data) {
+            $data['redirectUrl'] = 'https://yourshopdomain.com/return';
+            $data['description'] = 'Order Id # ' . $virtualOrderPage->uid();
+            
+            return $data;
         }
     ]
 ];

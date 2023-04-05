@@ -67,21 +67,14 @@ class MollieGateway
                 // Create gateway instance
                 $mollie = new MollieGateway();
 
-                // order description
-                $orderDescription = option('owebstudio.merx-mollie.orderDescription');
-
-                if ($orderDescription instanceof Closure) {
-                    $orderDescription = $orderDescription($virtualOrderPage);
-                }
-
                 // Create payment data
                 $data = [
                     'amount' => [
                         'currency' => option('ww.merx.currency'),
                         'value' => number_format($cart->getSum(), 2, '.', '')
                     ],
-                    'description' => $orderDescription ?? 'Order Id # ' . $virtualOrderPage->uid() . ' (' . url() . ')',
-                    'redirectUrl' => option('owebstudio.merx-mollie.redirectUrl', url(option('ww.merx.successPage')))
+                    'description' => 'Order Id # ' . $virtualOrderPage->uid() . ' (' . url() . ')',
+                    'redirectUrl' => url(option('ww.merx.successPage'))
                 ];
 
                 // Set test mode
@@ -105,6 +98,13 @@ class MollieGateway
                     $data['webhookUrl'] = url('shop-api/mollie-webhook');
                 }
 
+                // Custom initialize payment
+                $initializePayment = option('owebstudio.merx-mollie.initializePayment');
+
+                if ($initializePayment instanceof Closure) {
+                    $data = $initializePayment($virtualOrderPage, $data);
+                }
+
                 // Create payment request
                 $payment = $mollie->createPayment($data);
 
@@ -124,21 +124,28 @@ class MollieGateway
                 $payment = $gateway->getPayment($virtualOrderPage->orderId());
                 $status = $payment->status ?? 'failed';
 
-                // Check payment status success
-                if (in_array($status, ['paid', 'pending', 'open']) === false) {
-                    throw new Exception([
-                        'httpCode' => 400,
-                        'key' => 'merx.' . ($status === 'canceled' ? 'paymentCanceled' : 'completePayment')
-                    ]);
-                }
+                // Custom complete payment
+                $completePayment = option('owebstudio.merx-mollie.completePayment');
 
-                // Update payment as completed
-                if ($status === 'paid') {
-                    $virtualOrderPage->content()->update([
-                        'paymentMethod' => 'mollie:' . $payment->method,
-                        'paymentComplete' => true,
-                        'payedDate' => date('c')
-                    ]);
+                if ($completePayment instanceof Closure) {
+                    $virtualOrderPage = $completePayment($virtualOrderPage, $data, $payment);
+                } else {
+                    // Check payment status success
+                    if (in_array($status, ['paid', 'pending', 'open']) === false) {
+                        throw new Exception([
+                            'httpCode' => 400,
+                            'key' => 'merx.' . ($status === 'canceled' ? 'paymentCanceled' : 'completePayment')
+                        ]);
+                    }
+
+                    // Update payment as completed
+                    if ($status === 'paid') {
+                        $virtualOrderPage->content()->update([
+                            'paymentMethod' => 'mollie:' . $payment->method,
+                            'paymentComplete' => true,
+                            'payedDate' => date('c')
+                        ]);
+                    }
                 }
 
                 return $virtualOrderPage;
