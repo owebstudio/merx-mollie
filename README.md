@@ -84,7 +84,7 @@ Possible values: `applepay`, `bancontact`, `banktransfer`, `belfius`, `creditcar
 return [
     'owebstudio.merx-mollie' => [
         'apiKey'            => 'YOUR_API_KEY',
-        'redirectUrl'       => 'https://yourshopdomain.com/return'
+        'redirectUrl'       => 'https://yourshopdomain.com/return',
         'orderDescription'  => function ($virtualOrderPage) {
             retturn 'Order Id # ' . $virtualOrderPage->uid();
         }
