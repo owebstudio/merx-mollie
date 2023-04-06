@@ -1,8 +1,8 @@
 <?php return array(
     'root' => array(
         'name' => 'owebstudio/merx-mollie',
-        'pretty_version' => '1.2.3',
-        'version' => '1.2.3.0',
+        'pretty_version' => '1.3.0',
+        'version' => '1.3.0.0',
         'reference' => NULL,
         'type' => 'kirby-plugin',
         'install_path' => __DIR__ . '/../../',
@@ -29,17 +29,17 @@
             'dev_requirement' => false,
         ),
         'mollie/mollie-api-php' => array(
-            'pretty_version' => 'v2.52.0',
-            'version' => '2.52.0.0',
-            'reference' => 'f2f694ce26ef37362bdffe7b230b4d89f1c74e2d',
+            'pretty_version' => 'v2.52.1',
+            'version' => '2.52.1.0',
+            'reference' => '18325a3140ca9a8998b133b63c29b67d3534d928',
             'type' => 'library',
             'install_path' => __DIR__ . '/../mollie/mollie-api-php',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'owebstudio/merx-mollie' => array(
-            'pretty_version' => '1.2.3',
-            'version' => '1.2.3.0',
+            'pretty_version' => '1.3.0',
+            'version' => '1.3.0.0',
             'reference' => NULL,
             'type' => 'kirby-plugin',
             'install_path' => __DIR__ . '/../../',
