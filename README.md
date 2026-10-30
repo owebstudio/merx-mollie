@@ -4,7 +4,7 @@ This plugin is [Mollie](https://www.mollie.com) payment gateway for [Kirby Merx 
 
 ## Requirements
 
-- Kirby 3.9, 4 or 5
+- Kirby 4 or 5
 - Merx 1.10
 - PHP 8.1 or newer
 - A license key for live sites, see [License](#license)
