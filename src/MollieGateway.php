@@ -128,10 +128,11 @@ class MollieGateway
                 // Create payment request
                 $payment = $mollie->createPayment($data);
 
-                // Update the order
+                // Update the order, overwriting values that came from the checkout form
                 MollieGateway::updateOrderPage($virtualOrderPage, [
                     'orderId' => $payment->id,
                     'redirect' => $payment->getCheckoutUrl(),
+                    'paymentComplete' => false,
                 ]);
 
                 return $virtualOrderPage;
@@ -150,20 +151,30 @@ class MollieGateway
                 if ($completePayment instanceof Closure) {
                     $virtualOrderPage = $completePayment($virtualOrderPage, $data, $payment);
                 } else {
+                    // Bank transfers stay open until the money arrives,
+                    // any other open payment was left by the buyer
+                    $pending = $status === 'pending' || ($status === 'open' && $payment->method === 'banktransfer');
+
                     // Check payment status success
-                    if (in_array($status, ['paid', 'pending', 'open']) === false) {
+                    if ($status !== 'paid' && $pending === false) {
                         throw new Exception([
                             'httpCode' => 400,
-                            'key' => 'merx.' . ($status === 'canceled' ? 'paymentCanceled' : 'completePayment')
+                            'key' => 'merx.' . (in_array($status, ['open', 'canceled']) === true ? 'paymentCanceled' : 'completePayment')
                         ]);
                     }
 
-                    // Update payment as completed
                     if ($status === 'paid') {
+                        // Update payment as completed
                         MollieGateway::updateOrderPage($virtualOrderPage, [
                             'paymentMethod' => 'mollie:' . $payment->method,
                             'paymentComplete' => true,
                             'paidDate' => date('c')
+                        ]);
+                    } else {
+                        // The webhook completes pending payments
+                        MollieGateway::updateOrderPage($virtualOrderPage, [
+                            'paymentMethod' => 'mollie:' . $payment->method,
+                            'paymentComplete' => false
                         ]);
                     }
                 }
