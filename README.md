@@ -1,3 +1,5 @@
+![Mollie for Merx, a Kirby plugin by oweb studio. Mollie payments for the Merx shop plugin.](.github/cover.png)
+
 # Mollie Payment Gateway for Merx
 
 [![Buy a license for €19.99](https://img.shields.io/badge/Buy%20a%20license-%E2%82%AC19.99-2da44e?style=for-the-badge)](https://owebstudio.lemonsqueezy.com/checkout/buy/c1a1402c-6fd3-4467-96ff-33529994a246)
