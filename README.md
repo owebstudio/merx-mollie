@@ -1,5 +1,7 @@
 # Mollie Payment Gateway for Merx
 
+[![Buy a license for €19.99](https://img.shields.io/badge/Buy%20a%20license-%E2%82%AC19.99-2da44e?style=for-the-badge)](https://owebstudio.lemonsqueezy.com/checkout/buy/c1a1402c-6fd3-4467-96ff-33529994a246)
+
 This plugin is [Mollie](https://www.mollie.com) payment gateway for [Kirby Merx plugin](https://github.com/wagnerwagner/merx).
 
 ## Requirements
@@ -156,8 +158,8 @@ return [
 
 ## License
 
-Mollie for Merx is a commercial plugin. It is free to use on your local computer and on staging sites. A live site needs a license key: buy it on [owebstudio.com](https://owebstudio.com/kirby/plugins/mollie-merx) and activate it in the Panel's System view (Kirby 5) by clicking the license status of the plugin. Kirby 4 has no license status in the System view, so the key can't be activated there.
+Mollie for Merx is a commercial plugin. It is free to use on your local computer and on staging sites. A live site needs a license key: [buy it for €19.99](https://owebstudio.lemonsqueezy.com/checkout/buy/c1a1402c-6fd3-4467-96ff-33529994a246) and activate it in the Panel's System view (Kirby 5) by clicking the license status of the plugin. Kirby 4 has no license status in the System view, so the key can't be activated there.
 
 The license check never blocks your checkout. Without a license key, the System view shows that the plugin is not activated, and payments keep working.
 
-[oweb studio Commercial License](LICENSE.md). Versions released under the MIT license stay MIT. The current license is available at https://owebstudio.com/license.
+[oweb studio Commercial License](LICENSE.md). Versions released under the MIT license stay MIT. The current license is available at https://github.com/owebstudio/.github/blob/main/LICENSE.md.
