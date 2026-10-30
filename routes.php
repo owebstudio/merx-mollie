@@ -31,7 +31,7 @@ return [
 
                             $orderPage->update([
                                 'paymentComplete' => true,
-                                'payedDate' => date('c')
+                                'paidDate' => date('c')
                             ]);
                         }
                     }

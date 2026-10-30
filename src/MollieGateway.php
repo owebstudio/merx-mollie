@@ -163,7 +163,7 @@ class MollieGateway
                         MollieGateway::updateOrderPage($virtualOrderPage, [
                             'paymentMethod' => 'mollie:' . $payment->method,
                             'paymentComplete' => true,
-                            'payedDate' => date('c')
+                            'paidDate' => date('c')
                         ]);
                     }
                 }
