@@ -11,8 +11,11 @@ Kirby::plugin('owebstudio/merx-mollie', [
         'apiKey' => null,
         'webhooks' => false
     ],
+    'hooks' => [
+        // Merx may be loaded after this plugin
+        'system.loadPlugins:after' => function () {
+            MollieGateway::register();
+        }
+    ],
     'routes' => include __DIR__ . '/routes.php'
 ]);
-
-// Register the gateway
-MollieGateway::register();
