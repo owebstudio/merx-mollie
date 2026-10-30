@@ -3,6 +3,7 @@
 namespace Oweb;
 
 use Closure;
+use Kirby\Cms\App;
 use Kirby\Exception\Exception;
 use Mollie\Api\MollieApiClient;
 use OrderPage;
@@ -56,6 +57,43 @@ class MollieGateway
     }
 
     /**
+     * Updates the content of the (virtual) order page.
+     * Kirby 5 doesn't keep changes made with `content()->update()`.
+     *
+     * @param OrderPage $orderPage
+     * @param array $data
+     * @return OrderPage
+     */
+    public static function updateOrderPage(OrderPage $orderPage, array $data)
+    {
+        if (version_compare(App::version(), '5.0.0', '>=') === true) {
+            $orderPage->version('latest')->update($data);
+        } else {
+            $orderPage->content()->update($data);
+        }
+
+        return $orderPage;
+    }
+
+    /**
+     * Checks for local urls that Mollie can't reach
+     * and doesn't accept as webhook url
+     *
+     * @param string $url
+     * @return bool
+     */
+    public static function isLocalUrl(string $url)
+    {
+        $host = trim((string)parse_url($url, PHP_URL_HOST), '[]');
+
+        if (filter_var($host, FILTER_VALIDATE_IP) !== false) {
+            return filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false;
+        }
+
+        return $host === '' || $host === 'localhost' || preg_match('/\.(localhost|local|test)$/', $host) === 1;
+    }
+
+    /**
      * Register mollie gateway to Merx
      */
     public static function register()
@@ -78,7 +116,7 @@ class MollieGateway
                 ];
 
                 // Set test mode
-                if ($virtualOrderPage->testmode()->or(option('owebstudio.merx-mollie.testmode', false))->bool() === true) {
+                if (option('owebstudio.merx-mollie.testmode', false) === true) {
                     $data['testmode'] = true;
                 }
 
@@ -94,8 +132,10 @@ class MollieGateway
                 }
 
                 // Set webhook url if enabled
-                if (option('owebstudio.merx-mollie.webhooks', false) === true) {
-                    $data['webhookUrl'] = url('shop-api/mollie-webhook');
+                $webhookUrl = url('shop-api/mollie-webhook');
+
+                if (option('owebstudio.merx-mollie.webhooks', true) === true && MollieGateway::isLocalUrl($webhookUrl) === false) {
+                    $data['webhookUrl'] = $webhookUrl;
                 }
 
                 // Custom initialize payment
@@ -108,10 +148,11 @@ class MollieGateway
                 // Create payment request
                 $payment = $mollie->createPayment($data);
 
-                // Update the order
-                $virtualOrderPage->content()->update([
+                // Update the order, overwriting values that came from the checkout form
+                MollieGateway::updateOrderPage($virtualOrderPage, [
                     'orderId' => $payment->id,
                     'redirect' => $payment->getCheckoutUrl(),
+                    'paymentComplete' => false,
                 ]);
 
                 return $virtualOrderPage;
@@ -130,20 +171,30 @@ class MollieGateway
                 if ($completePayment instanceof Closure) {
                     $virtualOrderPage = $completePayment($virtualOrderPage, $data, $payment);
                 } else {
+                    // Bank transfers stay open until the money arrives,
+                    // any other open payment was left by the buyer
+                    $pending = $status === 'pending' || ($status === 'open' && $payment->method === 'banktransfer');
+
                     // Check payment status success
-                    if (in_array($status, ['paid', 'pending', 'open']) === false) {
+                    if ($status !== 'paid' && $pending === false) {
                         throw new Exception([
                             'httpCode' => 400,
-                            'key' => 'merx.' . ($status === 'canceled' ? 'paymentCanceled' : 'completePayment')
+                            'key' => 'merx.' . (in_array($status, ['open', 'canceled']) === true ? 'paymentCanceled' : 'completePayment')
                         ]);
                     }
 
-                    // Update payment as completed
                     if ($status === 'paid') {
-                        $virtualOrderPage->content()->update([
+                        // Update payment as completed
+                        MollieGateway::updateOrderPage($virtualOrderPage, [
                             'paymentMethod' => 'mollie:' . $payment->method,
                             'paymentComplete' => true,
-                            'payedDate' => date('c')
+                            'paidDate' => date('c')
+                        ]);
+                    } else {
+                        // The webhook completes pending payments
+                        MollieGateway::updateOrderPage($virtualOrderPage, [
+                            'paymentMethod' => 'mollie:' . $payment->method,
+                            'paymentComplete' => false
                         ]);
                     }
                 }
