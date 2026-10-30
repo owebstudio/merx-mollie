@@ -25,9 +25,12 @@
     }
   ],
   "require": {
-    "php": "^8.0",
+    "php": "^8.1",
     "getkirby/composer-installer": "^1.2",
     "mollie/mollie-api-php": "^2.0"
+  },
+  "require-dev": {
+    "owebstudio/kirby-license": "^1.0"
   },
   "config": {
     "optimize-autoloader": true,
