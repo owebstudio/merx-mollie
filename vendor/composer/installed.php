@@ -1,8 +1,8 @@
 <?php return array(
     'root' => array(
         'name' => 'owebstudio/merx-mollie',
-        'pretty_version' => '1.3.0',
-        'version' => '1.3.0.0',
+        'pretty_version' => '1.5.1',
+        'version' => '1.5.1.0',
         'reference' => NULL,
         'type' => 'kirby-plugin',
         'install_path' => __DIR__ . '/../../',
@@ -38,8 +38,8 @@
             'dev_requirement' => false,
         ),
         'owebstudio/merx-mollie' => array(
-            'pretty_version' => '1.3.0',
-            'version' => '1.3.0.0',
+            'pretty_version' => '1.5.1',
+            'version' => '1.5.1.0',
             'reference' => NULL,
             'type' => 'kirby-plugin',
             'install_path' => __DIR__ . '/../../',
