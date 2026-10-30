@@ -2,7 +2,7 @@
   "name": "owebstudio/merx-mollie",
   "description": "Mollie payment gateway for Kirby Merx plugin.",
   "type": "kirby-plugin",
-  "license": "MIT",
+  "license": "proprietary",
   "keywords": [
     "owebstudio",
     "owebstudio-plugin",

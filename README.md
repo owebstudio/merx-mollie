@@ -7,6 +7,7 @@ This plugin is [Mollie](https://www.mollie.com) payment gateway for [Kirby Merx 
 - Kirby 3.9, 4 or 5
 - Merx 1.10
 - PHP 8.1 or newer
+- A license key for live sites, see [License](#license)
 
 ## Installation
 
@@ -152,3 +153,11 @@ return [
     ]
 ];
 ```
+
+## License
+
+Mollie for Merx is a commercial plugin. It is free to use on your local computer and on staging sites. A live site needs a license key: buy it on [owebstudio.com](https://owebstudio.com/kirby/plugins/mollie-merx) and activate it in the Panel's System view (Kirby 5) by clicking the license status of the plugin. Kirby 4 has no license status in the System view, so the key can't be activated there.
+
+The license check never blocks your checkout. Without a license key, the System view shows that the plugin is not activated, and payments keep working.
+
+[oweb studio Commercial License](LICENSE.md). Versions released under the MIT license stay MIT. The current license is available at https://owebstudio.com/license.
