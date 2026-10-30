@@ -98,7 +98,7 @@ class MollieGateway
                 ];
 
                 // Set test mode
-                if ($virtualOrderPage->testmode()->or(option('owebstudio.merx-mollie.testmode', false))->bool() === true) {
+                if (option('owebstudio.merx-mollie.testmode', false) === true) {
                     $data['testmode'] = true;
                 }
 
