@@ -3,6 +3,7 @@
 namespace Oweb;
 
 use Closure;
+use Kirby\Cms\App;
 use Kirby\Exception\Exception;
 use Mollie\Api\MollieApiClient;
 use OrderPage;
@@ -53,6 +54,25 @@ class MollieGateway
     public function createPayment(array $data)
     {
         return $this->client->payments->create($data);
+    }
+
+    /**
+     * Updates the content of the (virtual) order page.
+     * Kirby 5 doesn't keep changes made with `content()->update()`.
+     *
+     * @param OrderPage $orderPage
+     * @param array $data
+     * @return OrderPage
+     */
+    public static function updateOrderPage(OrderPage $orderPage, array $data)
+    {
+        if (version_compare(App::version(), '5.0.0', '>=') === true) {
+            $orderPage->version('latest')->update($data);
+        } else {
+            $orderPage->content()->update($data);
+        }
+
+        return $orderPage;
     }
 
     /**
@@ -109,7 +129,7 @@ class MollieGateway
                 $payment = $mollie->createPayment($data);
 
                 // Update the order
-                $virtualOrderPage->content()->update([
+                MollieGateway::updateOrderPage($virtualOrderPage, [
                     'orderId' => $payment->id,
                     'redirect' => $payment->getCheckoutUrl(),
                 ]);
@@ -140,7 +160,7 @@ class MollieGateway
 
                     // Update payment as completed
                     if ($status === 'paid') {
-                        $virtualOrderPage->content()->update([
+                        MollieGateway::updateOrderPage($virtualOrderPage, [
                             'paymentMethod' => 'mollie:' . $payment->method,
                             'paymentComplete' => true,
                             'payedDate' => date('c')
