@@ -9,7 +9,7 @@ use Oweb\MollieGateway;
 Kirby::plugin('owebstudio/merx-mollie', [
     'options' => [
         'apiKey' => null,
-        'webhooks' => false
+        'webhooks' => true
     ],
     'hooks' => [
         // Merx may be loaded after this plugin

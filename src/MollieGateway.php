@@ -76,6 +76,24 @@ class MollieGateway
     }
 
     /**
+     * Checks for local urls that Mollie can't reach
+     * and doesn't accept as webhook url
+     *
+     * @param string $url
+     * @return bool
+     */
+    public static function isLocalUrl(string $url)
+    {
+        $host = trim((string)parse_url($url, PHP_URL_HOST), '[]');
+
+        if (filter_var($host, FILTER_VALIDATE_IP) !== false) {
+            return filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false;
+        }
+
+        return $host === '' || $host === 'localhost' || preg_match('/\.(localhost|local|test)$/', $host) === 1;
+    }
+
+    /**
      * Register mollie gateway to Merx
      */
     public static function register()
@@ -114,8 +132,10 @@ class MollieGateway
                 }
 
                 // Set webhook url if enabled
-                if (option('owebstudio.merx-mollie.webhooks', false) === true) {
-                    $data['webhookUrl'] = url('shop-api/mollie-webhook');
+                $webhookUrl = url('shop-api/mollie-webhook');
+
+                if (option('owebstudio.merx-mollie.webhooks', true) === true && MollieGateway::isLocalUrl($webhookUrl) === false) {
+                    $data['webhookUrl'] = $webhookUrl;
                 }
 
                 // Custom initialize payment
